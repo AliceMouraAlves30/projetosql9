@@ -52,3 +52,51 @@ INSERT INTO Pedidos (id_cliente,id_mesa,data_pedido,total) VALUES
 INSERT INTO Itens_Pedido (id_pedido,descricao_item,quantidade,preco_unitario) VALUES
 (1,'pizza',2,35.25),
 (2,'suco',1,10.00);
+
+-- Seleciona todos os clientes
+SELECT * FROM Clientes;
+
+-- Seleciona todas as mesas
+SELECT * FROM Mesas;
+
+-- Seleciona todos os pedidos realizados na mesa 1
+SELECT * FROM Pedidos
+WHERE id_mesa = 1;
+
+-- Seleciona os dados dos clientes que têm pedidos com valor total maior que 50
+SELECT c.nome, c.telefone, c.email
+FROM Clientes c
+JOIN Pedidos p ON p.id_cliente = c.id_cliente
+WHERE p.total > 50;
+
+-- Atualiza o total do pedido com id_pedido = 1 para 150.75
+UPDATE Pedidos
+SET total = 150.75
+WHERE id_pedido = 1;
+
+-- Atualiza a capacidade da mesa 2 para 10 lugares
+UPDATE Mesas
+SET capacidade = 10
+WHERE id_mesa = 2;
+
+-- Atualiza o telefone de Betina Santos
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE Clientes
+SET telefone = '4899999999'
+WHERE nome = 'Betina Santos';
+
+SET SQL_SAFE_UPDATES = 1;
+
+
+-- Deleta o pedido com id_pedido = 2
+DELETE FROM Pedidos
+WHERE id_pedido = 2;
+
+-- Deleta o cliente com id_cliente = 2 (Betina Santos)
+DELETE FROM Clientes
+WHERE id_cliente = 2;
+
+-- Deleta a mesa 2
+DELETE FROM Mesas
+WHERE id_mesa = 2;
