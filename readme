@@ -1,0 +1,110 @@
+# RestauranteDB
+
+**RestauranteDB** é um sistema de gerenciamento para restaurantes, projetado para controlar informações sobre clientes, mesas, pedidos e itens de pedidos. O banco de dados permite operações CRUD (Create, Read, Update, Delete) com relacionamentos entre as tabelas.
+
+## Estrutura do Banco de Dados
+
+### Tabelas
+
+- **Clientes**
+  - `id_cliente`: Identificador único do cliente (Chave Primária).
+  - `nome`: Nome do cliente.
+  - `telefone`: Número de telefone do cliente.
+  - `email`: Endereço de e-mail do cliente.
+
+- **Mesas**
+  - `id_mesa`: Identificador único da mesa (Chave Primária).
+  - `numero_mesa`: Número da mesa.
+  - `capacidade`: Capacidade da mesa (número de lugares).
+
+- **Pedidos**
+  - `id_pedido`: Identificador único do pedido (Chave Primária).
+  - `id_cliente`: Identificador do cliente que fez o pedido (Chave Estrangeira referenciando `Clientes`).
+  - `id_mesa`: Identificador da mesa onde o pedido foi realizado (Chave Estrangeira referenciando `Mesas`).
+  - `data_pedido`: Data e hora do pedido.
+  - `total`: Valor total do pedido.
+
+- **Itens_Pedido**
+  - `id_item`: Identificador único do item do pedido (Chave Primária).
+  - `id_pedido`: Identificador do pedido ao qual o item pertence (Chave Estrangeira referenciando `Pedidos`).
+  - `descricao_item`: Descrição do item do pedido.
+  - `quantidade`: Quantidade do item.
+  - `preco_unitario`: Preço unitário do item.
+
+## Instruções
+
+1. **Criar o Banco de Dados e Tabelas**
+
+   Execute o script SQL fornecido para criar o banco de dados `RestauranteDB`, tabelas e inserir dados de exemplo.
+
+2. **Consultas Exemplares**
+
+   - Selecionar todos os clientes:
+     ```sql
+     SELECT * FROM Clientes;
+     ```
+
+   - Selecionar todas as mesas:
+     ```sql
+     SELECT * FROM Mesas;
+     ```
+
+   - Selecionar todos os pedidos realizados na mesa 1:
+     ```sql
+     SELECT * FROM Pedidos WHERE id_mesa = 1;
+     ```
+
+   - Selecionar dados dos clientes que têm pedidos com valor total maior que 50:
+     ```sql
+     SELECT c.nome, c.telefone, c.email
+     FROM Clientes c
+     JOIN Pedidos p ON p.id_cliente = c.id_cliente
+     WHERE p.total > 50;
+     ```
+
+3. **Atualizações e Exclusões**
+
+   - Atualizar o total do pedido com `id_pedido = 1` para 150.75:
+     ```sql
+     UPDATE Pedidos SET total = 150.75 WHERE id_pedido = 1;
+     ```
+
+   - Atualizar a capacidade da mesa 2 para 10 lugares:
+     ```sql
+     UPDATE Mesas SET capacidade = 10 WHERE id_mesa = 2;
+     ```
+
+   - Atualizar o telefone de Betina Santos:
+     ```sql
+     SET SQL_SAFE_UPDATES = 0;
+     UPDATE Clientes SET telefone = '4899999999' WHERE nome = 'Betina Santos';
+     SET SQL_SAFE_UPDATES = 1;
+     ```
+
+   - Deletar o pedido com `id_pedido = 2`:
+     ```sql
+     DELETE FROM Pedidos WHERE id_pedido = 2;
+     ```
+
+   - Deletar o cliente com `id_cliente = 2` (Betina Santos):
+     ```sql
+     DELETE FROM Clientes WHERE id_cliente = 2;
+     ```
+
+   - Deletar a mesa 2:
+     ```sql
+     DELETE FROM Mesas WHERE id_mesa = 2;
+     ```
+
+## Arquivos
+
+- `script.sql`: Contém o código SQL para criação de banco de dados, tabelas e inserção de dados.
+- `README.md`: Documento de informações e instruções para uso do banco de dados.
+
+## Contribuições
+
+Se você deseja contribuir com o projeto, por favor, envie um pull request ou abra uma issue.
+
+## Licença
+
+Este projeto está licenciado sob a [MIT License](LICENSE).
