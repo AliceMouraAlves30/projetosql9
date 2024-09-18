@@ -1,0 +1,13 @@
+# Ignorar arquivos de banco de dados locais
+*.sql
+
+# Ignorar arquivos de log
+*.log
+
+# Ignorar arquivos temporários
+*.tmp
+*.swp
+
+# Ignorar diretórios específicos
+node_modules/
+.DS_Store
